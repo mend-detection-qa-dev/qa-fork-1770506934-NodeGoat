@@ -1,38 +1,162 @@
-# V-Achilles
-## Prioritizing Vulnerable Dependency Updates through Dependency Graphs
-V-Achilles is a tool that shows a visualization (i.e., using dependency graphs) of both direct and indirect dependencies that are affected by software vulnerabilityattacks. 
+# NodeGoat
 
-## Demo Website
-The working prototype of V-Achilles can be found here: [https://v-achilles.com](https://v-achilles.com)
+Being lightweight, fast, and scalable, Node.js is becoming a widely adopted platform for developing web applications. This project provides an environment to learn how OWASP Top 10 security risks apply to web applications developed using Node.js and how to effectively address them.
 
-## Video Demo
-The demo video on how V-Achilles works can be found here: [https://youtu.be/tspiZfhMNcs](https://youtu.be/tspiZfhMNcs)
+## Getting Started
 
-## Screenshot of V-Achilles
-![CleanShot 2564-12-15 at 18 32 52@2x](https://user-images.githubusercontent.com/1671353/146179237-74cca704-9160-4b63-b84f-e8d2bfd91e08.png)
+OWASP Top 10 for Node.js web applications:
 
-## Vulnerability Reports of the 4 GitHub Repositories
-- sinopia: [report](files/sinopia.pdf)
-- cpnmjs: [report](files/cpnmjs.pdf)
-- window-build-tool: [report](files/windows-build-tools.pdf)
-- npx: [report](files/npx.pdf)
+### Know it!
 
-## Results from the User Study
-<img width="589" alt="Task1-Exp" src="https://user-images.githubusercontent.com/1671353/220164930-209cf168-6931-48eb-8b90-bce198700402.png">
-<img width="585" alt="Task1-Ctrl" src="https://user-images.githubusercontent.com/1671353/220164943-277be9c9-c113-43c2-b42a-7dcbec6e6863.png">
-<img width="567" alt="Task2-Exp" src="https://user-images.githubusercontent.com/1671353/220164960-ccd23f1b-5038-4053-8507-ede36dce8cae.png">
-<img width="571" alt="Task2-Ctrl" src="https://user-images.githubusercontent.com/1671353/220164965-30d76de5-f4f9-46d1-ab91-f85b0cc1bc62.png">
+This application bundled a tutorial page that explains the OWASP Top 10 vulnerabilities and how to fix them.
 
-## Installation Guides
-The Achilles website was built by two folders below, please read `README.md` in each folder to see how to get started. 
-- achilles-frontend (Front-end): [README.md](https://github.com/MUICT-SERU/Achilles/blob/master/achilles-frontend/README.md)
-- baak-dataload-sql (Back-end): [README.md](https://github.com/MUICT-SERU/Achilles/blob/master/baak-dataload-sql/README.md)
+Once the application is running, you can access the tutorial page at [http://localhost:4000/tutorial](http://localhost:4000/tutorial) (or the port you have configured).
 
-## Team
-Vipawan Jarukitpipat, Klinton Chhun, Wachirayana Wanprasert, [Chaiyong Ragkhitwetsagul](https://cragkhit.github.io/), [Morakot Choetkiertikul](https://morakotch.wordpress.com/), [Thanwadee Sunetnanta](http://mucc.mahidol.ac.th/~ittth/),
-[Software Engineering Research Unit (SERU)](https://muict-seru.github.io/),
-[Faculty of Information and Communication Technology (ICT), Mahidol University](https://www.ict.mahidol.ac.th/), Thailand
+### Do it!
 
-[Raula Gaikovina Kula](https://raux.github.io/), [Bodin Chinthanet](https://bchinthanet.com/), [Takashi Ishio](https://takashi-ishio.github.io/index-en.html), [Kenichi Matsumoto](https://scholar.google.com/citations?user=-DfBligAAAAJ&hl=en),
-[Software Engineering Research Lab](https://isw3.naist.jp/Research/cs-se-en.html),
-Nara Institute of Science and Technology (NAIST), Japan
+[A Vulnerable Node.js App for Ninjas](http://nodegoat.herokuapp.com/) to exploit, toast, and fix. You may like to [set up your own copy](#how-to-set-up-your-copy-of-nodegoat) of the app to fix and test vulnerabilities. Hint: Look for comments in the source code.
+
+##### Default user accounts
+
+The database comes pre-populated with these user accounts created as part of the seed data -
+* Admin Account - u:`admin` p:`Admin_123`
+* User Accounts (u:`user1` p:`User1_123`), (u:`user2` p:`User2_123`)
+* New users can also be added using the sign-up page.
+
+## How to Set Up Your Copy of NodeGoat
+
+### OPTION 1 - Run NodeGoat on your machine
+
+1) Install [Node.js](http://nodejs.org/) - NodeGoat requires Node v8 or above
+
+2) Clone the github repository:
+   ```
+   git clone https://github.com/OWASP/NodeGoat.git
+   ```
+
+3) Go to the directory:
+   ```
+   cd NodeGoat
+   ```
+
+4) Install node packages:
+   ```
+   npm install
+   ```
+
+5) Set up MongoDB. You can either install MongoDB locally or create a remote instance:
+
+   * Using local MongoDB:
+     1) Install [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/)
+     2) Start [mongod](http://docs.mongodb.org/manual/reference/program/mongod/#bin.mongod)
+
+   * Using remote MongoDB instance:
+     1) [Deploy a MongoDB Atlas free tier cluster](https://docs.atlas.mongodb.com/tutorial/deploy-free-tier-cluster/) (M0 Sandbox)
+     2) [Enable network access](https://docs.atlas.mongodb.com/security/add-ip-address-to-list/) to the cluster from your current IP address
+     3) [Add a database user](https://docs.atlas.mongodb.com/tutorial/create-mongodb-user-for-cluster/) to the cluster
+     4) Set the `MONGODB_URI` environment variable to the connection string of your cluster, which can be viewed in the cluster's
+        [connect dialog](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster). Select "Connect your application",
+        set the driver to "Node.js" and the version to "2.2.12 or later". This will give a connection string in the form:
+        ```
+        mongodb://<username>:<password>@<cluster>/<dbname>?ssl=true&replicaSet=<rsname>&authSource=admin&retryWrites=true&w=majority
+        ```
+        The `<username>` and `<password>` fields need filling in with the details of the database user added earlier. The `<dbname>` field sets the name of the
+        database nodegoat will use in the cluster (eg "nodegoat"). The other fields will already be filled in with the correct details for your cluster.
+
+6) Populate MongoDB with the seed data required for the app:
+   ```
+   npm run db:seed
+   ```
+   By default this will use the "development" configuration, but the desired config can be passed as an argument if required.
+
+7) Start the server. You can run the server using node or nodemon:
+   * Start the server with node. This starts the NodeGoat application at [http://localhost:4000/](http://localhost:4000/):
+     ```
+     npm start
+     ```
+   * Start the server with nodemon, which will automatically restart the application when you make any changes. This starts the NodeGoat application at [http://localhost:5000/](http://localhost:5000/):
+     ```
+     npm run dev
+     ```
+
+#### Customizing the Default Application Configuration
+
+By default the application will be hosted on port 4000 and will connect to a MongoDB instance at localhost:27017. To change this set the environment variables `PORT` and `MONGODB_URI`.
+
+Other settings can be changed by updating the [config file](https://github.com/OWASP/NodeGoat/blob/master/config/env/all.js).
+
+### OPTION 2 - Run NodeGoat on Docker
+
+The repo includes the Dockerfile and docker-compose.yml necessary to set up the app and db instance, then connect them together.
+
+1) Install [docker](https://docs.docker.com/installation/) and [docker compose](https://docs.docker.com/compose/install/) 
+
+2) Clone the github repository:
+   ```
+   git clone https://github.com/OWASP/NodeGoat.git
+   ```
+
+3) Go to the directory:
+   ```
+   cd NodeGoat
+   ```
+
+4) Build the images:
+   ```
+   docker-compose build
+   ```
+
+5) Run the app, this starts the NodeGoat application at http://localhost:4000/:
+   ```
+   docker-compose up
+   ```
+
+### OPTION 3 - Deploy to Heroku
+
+This option uses a free ($0/month) Heroku node server.
+
+Though not essential, it is recommended that you fork this repository and deploy the forked repo.
+This will allow you to fix vulnerabilities in your own forked version, then deploy and test it on Heroku.
+
+1) Set up a publicly accessible MongoDB instance:
+   1) [Deploy a MongoDB Atlas free tier cluster](https://docs.atlas.mongodb.com/tutorial/deploy-free-tier-cluster/) (M0 Sandbox)
+   2) [Enable network access](https://docs.atlas.mongodb.com/security/ip-access-list/#add-ip-access-list-entries) to the cluster from anywhere (CIDR range 0.0.0.0/0)
+   3) [Add a database user](https://docs.atlas.mongodb.com/tutorial/create-mongodb-user-for-cluster/) to the cluster
+
+2) Deploy NodeGoat to Heroku by clicking the button below:
+
+   [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+   In the Create New App dialog, set the `MONGODB_URI` config var to the connection string of your MongoDB Atlas cluster.
+   This can be viewed in the cluster's [connect dialog](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster).
+   Select "Connect your application", set the driver to "Node.js" and the version to "2.2.12 or later".
+   This will give a connection string in the form:
+   ```
+   mongodb://<username>:<password>@<cluster>/<dbname>?ssl=true&replicaSet=<rsname>&authSource=admin&retryWrites=true&w=majority
+   ```
+   The `<username>` and `<password>` fields need filling in with the details of the database user added earlier. The `<dbname>` field sets the name of the
+   database nodegoat will use in the cluster (eg "nodegoat"). The other fields will already be filled in with the correct details for your cluster.
+
+## Report bugs, Feedback, Comments
+
+*  Open a new [issue](https://github.com/OWASP/NodeGoat/issues) or contact team by joining chat at [Slack](https://owasp.slack.com/messages/project-nodegoat/) or [![Join the chat at https://gitter.im/OWASP/NodeGoat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OWASP/NodeGoat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Contributing
+
+Please Follow [the contributing guide](CONTRIBUTING.md)
+
+## Code Of Conduct (CoC)
+
+This project is bound by a [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Contributors
+
+Here are the amazing [contributors](https://github.com/OWASP/NodeGoat/graphs/contributors) to the NodeGoat project.
+
+## Supports
+
+- Thanks to JetBrains for providing licenses to fantastic [WebStorm IDE](https://www.jetbrains.com/webstorm/) to build this project.
+
+## License
+
+Code licensed under the [Apache License v2.0.](http://www.apache.org/licenses/LICENSE-2.0)
