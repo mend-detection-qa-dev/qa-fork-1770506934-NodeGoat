@@ -2,7 +2,6 @@
   "description": "Autotest configuration file for reachability detection validation",
   "version": 1.5,
   "base_config": {
-    "validate_issues": false,
     "validate_reachability": true,
     "reachability": {
       "check_reachability_status": true,
